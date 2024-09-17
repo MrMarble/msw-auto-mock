@@ -14,7 +14,7 @@
     "@faker-js/faker": "8.4.1",
     "@vitejs/plugin-react": "4.3.1",
     "msw": "2.3.1",
-    "msw-auto-mock": "workspace:*",
+    "@mrmarble/msw-auto-mock": "workspace:*",
     "vite": "5.3.3"
   },
   "msw": {
