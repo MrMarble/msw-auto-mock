@@ -1,5 +1,5 @@
 {
-  "name": "msw-auto-mock",
+  "name": "@mrmarble/msw-auto-mock",
   "version": "0.25.0",
   "description": "Generate random mock data from OpenAPI descriptions for msw.",
   "main": "dist/cli.js",
@@ -13,6 +13,12 @@
     "release": "changeset publish"
   },
   "author": "zoubingwu<zoubingwu@gmail.com>",
+  "maintainers": [
+    {
+      "name": "MrMarble",
+      "url": "https://github.com/mrmarble"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "@ai-sdk/anthropic": "0.0.27",
@@ -44,12 +50,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zoubingwu/msw-auto-mock.git"
+    "url": "git+https://github.com/mrmarble/msw-auto-mock.git"
   },
   "bugs": {
-    "url": "https://github.com/zoubingwu/msw-auto-mock/issues"
+    "url": "https://github.com/mrmarble/msw-auto-mock/issues"
   },
-  "homepage": "https://github.com/zoubingwu/msw-auto-mock",
+  "homepage": "https://github.com/mrmarble/msw-auto-mock",
   "files": [
     "dist"
   ],
