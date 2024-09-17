@@ -1,5 +1,11 @@
 # msw-auto-mock
 
+## 0.26.0
+
+### Minor Changes
+
+- a85a4fe: Add support for filtering endpoints by regex
+
 ## 0.25.0
 
 ### Minor Changes
