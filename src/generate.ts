@@ -16,9 +16,10 @@ import { name as moduleName } from '../package.json';
 export function generateOperationCollection(apiDoc: OpenAPIV3.Document, options: CliOptions) {
   const apiGen = new ApiGenerator(apiDoc, {});
   const operationDefinitions = getOperationDefinitions(apiDoc);
+  const filters = parseFilterOptions(options);
 
   return operationDefinitions
-    .filter(op => operationFilter(op, options))
+    .filter(op => operationFilter(op, filters, !!options.regex))
     .map(op => codeFilter(op, options))
     .map(definition => toOperation(definition, apiGen));
 }
@@ -105,16 +106,29 @@ function getOperationDefinitions(v3Doc: OpenAPIV3.Document): OperationDefinition
   );
 }
 
-function operationFilter(operation: OperationDefinition, options: CliOptions): boolean {
-  const includes = options?.includes?.split(',') ?? null;
-  const excludes = options?.excludes?.split(',') ?? null;
+function operationFilter(
+  operation: OperationDefinition,
+  { includes, excludes }: { includes: RegExp[] | string[] | null; excludes: RegExp[] | string[] | null },
+  regex?: boolean,
+): boolean {
+  if (regex) {
+    if (includes && !(includes as RegExp[]).some(r => r.test(operation.path))) {
+      return false;
+    }
+    if (excludes && (excludes as RegExp[]).some(r => r.test(operation.path))) {
+      return false;
+    }
 
-  if (includes && !includes.includes(operation.path)) {
+    return true;
+  }
+
+  if (includes && !(includes as string[]).includes(operation.path)) {
     return false;
   }
-  if (excludes?.includes(operation.path)) {
+  if (excludes && (excludes as string[])?.includes(operation.path)) {
     return false;
   }
+
   return true;
 }
 
@@ -230,4 +244,19 @@ function recursiveResolveSchema(schema: OpenAPIV3.ReferenceObject | OpenAPIV3.Sc
 
     return resolvedSchema;
   });
+}
+
+function parseFilterOptions(options: CliOptions) {
+  let includes: string[] | RegExp[] | null = options?.includes?.split(',') ?? null;
+  let excludes: string[] | RegExp[] | null = options?.excludes?.split(',') ?? null;
+
+  if (options.regex) {
+    includes = includes && includes.map(str => new RegExp(str));
+    excludes = excludes && excludes.map(str => new RegExp(str));
+  }
+
+  return {
+    includes,
+    excludes,
+  };
 }
