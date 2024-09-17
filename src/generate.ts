@@ -9,7 +9,7 @@ import { cosmiconfig } from 'cosmiconfig';
 import { getV3Doc } from './swagger';
 import { prettify, toExpressLikePath } from './utils';
 import { Operation } from './transform';
-import { browserIntegration, mockTemplate, nodeIntegration, reactNativeIntegration } from './template';
+import { browserIntegration, handlersTypes, mockTemplate, nodeIntegration, reactNativeIntegration } from './template';
 import { CliOptions, ConfigOptions } from './types';
 import { name as moduleName } from '../package.json';
 
@@ -61,6 +61,7 @@ export async function generate(spec: string, inlineOptions: CliOptions) {
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'native.js'), reactNativeIntegration);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'node.js'), nodeIntegration);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'browser.js'), browserIntegration);
+  fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'handlers.d.ts'), handlersTypes);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'handlers.js'), await prettify('handlers.js', code));
 }
 
