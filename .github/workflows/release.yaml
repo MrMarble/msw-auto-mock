@@ -6,7 +6,7 @@ name: Publish Github Packages
 on:
   push:
     branches:
-      - master
+      - release
 
 jobs:
   build:
