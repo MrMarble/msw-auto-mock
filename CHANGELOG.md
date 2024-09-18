@@ -1,5 +1,11 @@
 # msw-auto-mock
 
+## 0.28.0
+
+### Minor Changes
+
+- 819c9e3: Fix msw path parameters
+
 ## 0.27.0
 
 ### Minor Changes
