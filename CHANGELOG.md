@@ -1,5 +1,11 @@
 # msw-auto-mock
 
+## 0.28.1
+
+### Patch Changes
+
+- 0a0a47b: Fix replaceAll syntax
+
 ## 0.28.0
 
 ### Minor Changes
