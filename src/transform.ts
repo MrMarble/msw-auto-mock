@@ -83,7 +83,7 @@ export function transformToGenerateResultFunctions(
 export function transformToHandlerCode(operationCollection: OperationCollection): string {
   return operationCollection
     .map(op => {
-      return `http.${op.verb}(\`\${baseURL}${op.path}\`, async () => {
+      return `http.${op.verb}(\`\${baseURL}${op.path.replaceAll(/:\w+/, '*')}\`, async () => {
         const resultArray = [${op.response.map(response => {
           const identifier = getResIdentifierName(response);
           return parseInt(response?.code!) === 204
