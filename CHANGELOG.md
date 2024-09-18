@@ -1,5 +1,11 @@
 # msw-auto-mock
 
+## 0.27.0
+
+### Minor Changes
+
+- 6a19edb: Add types to all exports
+
 ## 0.26.0
 
 ### Minor Changes
