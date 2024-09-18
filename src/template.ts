@@ -62,6 +62,21 @@ export const handlersTypes = [
   `declare const handlers: Array<Parameters<typeof setupServer>[0]>;`,
 ].join('\n');
 
+export const browserIntegrationTypes = [
+  `import { setupWorker } from 'msw/browser';`,
+  `declare const worker: ReturnType<typeof setupWorker>;`,
+].join('\n');
+
+export const reactNativeIntegrationTypes = [
+  `import { setupServer } from 'msw/native';`,
+  `declare const server: ReturnType<typeof setupServer>;`,
+].join('\n');
+
+export const nodeIntegrationTypes = [
+  `import { setupServer } from 'msw/node';`,
+  `declare const server: ReturnType<typeof setupServer>;`,
+].join('\n');
+
 const askOpenai = (options: ConfigOptions) => `
 import { createOpenAI } from '@ai-sdk/openai';
 import { generateText } from 'ai';

@@ -9,7 +9,16 @@ import { cosmiconfig } from 'cosmiconfig';
 import { getV3Doc } from './swagger';
 import { prettify, toExpressLikePath } from './utils';
 import { Operation } from './transform';
-import { browserIntegration, handlersTypes, mockTemplate, nodeIntegration, reactNativeIntegration } from './template';
+import {
+  browserIntegration,
+  browserIntegrationTypes,
+  handlersTypes,
+  mockTemplate,
+  nodeIntegration,
+  nodeIntegrationTypes,
+  reactNativeIntegration,
+  reactNativeIntegrationTypes,
+} from './template';
 import { CliOptions, ConfigOptions } from './types';
 import { name as moduleName } from '../package.json';
 
@@ -59,8 +68,11 @@ export async function generate(spec: string, inlineOptions: CliOptions) {
   } catch {}
 
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'native.js'), reactNativeIntegration);
+  fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'native.d.ts'), reactNativeIntegrationTypes);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'node.js'), nodeIntegration);
+  fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'node.d.ts'), nodeIntegrationTypes);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'browser.js'), browserIntegration);
+  fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'browser.d.ts'), browserIntegrationTypes);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'handlers.d.ts'), handlersTypes);
   fs.writeFileSync(path.resolve(process.cwd(), targetFolder, 'handlers.js'), await prettify('handlers.js', code));
 }
