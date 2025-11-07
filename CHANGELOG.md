@@ -1,5 +1,11 @@
 # msw-auto-mock
 
+## 0.32.0
+
+### Minor Changes
+
+- 9333d99: Added regex filter option (--regex) that allows using regex expressions for partial path matching in both include and exclude filters
+
 ## 0.31.0
 
 ### Minor Changes
